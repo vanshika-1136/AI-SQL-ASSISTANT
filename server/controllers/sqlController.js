@@ -29,12 +29,16 @@ const generateQuery = async (req, res) => {
 
   } catch (err) {
 
-    console.log(err);
+  console.error("Full error:", err);
 
-    res.status(500).json({
-      success: false,
-      message: err.message,
-    });
+  if (err.response) {
+    console.error("Response data:", err.response.data);
+  }
+
+  res.status(500).json({
+    success: false,
+    message: err.message,
+  });
 
   }
 };
